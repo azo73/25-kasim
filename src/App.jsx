@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import QuickExitButton from './components/QuickExitButton';
 import IntroSplash from './components/IntroSplash';
 import SolidarityBanner from './components/SolidarityBanner';
 import RandomAwarenessCards from './components/RandomAwarenessCards';
@@ -68,8 +67,6 @@ export default function App() {
 
   return (
     <div className="flex min-h-dvh flex-col bg-canvas text-ink">
-      <QuickExitButton />
-
       <AnimatePresence>
         {showSplash && !isReportRoute && (
           <IntroSplash onFinish={() => setShowSplash(false)} />

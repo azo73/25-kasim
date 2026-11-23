@@ -35,17 +35,17 @@ export default function ReportDashboard({ onBackToApp }) {
   };
 
   return (
-    <div className="min-h-dvh bg-canvas px-5 pb-16 pt-16 text-ink sm:px-8">
+    <div className="min-h-dvh bg-canvas px-5 pb-16 pt-12 text-ink sm:px-8">
       <div className="mx-auto w-full max-w-3xl">
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-hairline pb-6">
           <div>
             <div className="flex items-center gap-2">
               <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-ribbon">
-                25 Kasım Kampüs Raporu
+                Mor Ses · Rapor Ekranı
               </span>
               {report && (
                 <span className="rounded-full border border-hairline bg-surface px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-muted">
-                  {report.mode === 'supabase' ? 'Canlı Supabase' : 'Demo Modu'}
+                  {report.mode === 'supabase' ? 'Canlı Supabase' : 'Yerel Kayıt'}
                 </span>
               )}
             </div>
@@ -182,7 +182,7 @@ export default function ReportDashboard({ onBackToApp }) {
                 <div className="flex items-center gap-2">
                   <MapPin className="h-4 w-4 text-ribbon" aria-hidden="true" />
                   <h2 className="font-serif text-xl font-semibold text-ink">
-                    QR Lokasyonlarına Göre Katılım (`?loc=`)
+                    Kaynak Noktalara Göre Katılım (`?loc=`)
                   </h2>
                 </div>
 
@@ -244,7 +244,7 @@ export default function ReportDashboard({ onBackToApp }) {
                     className="inline-flex items-center gap-1.5 text-xs font-medium text-muted hover:text-crimson"
                   >
                     <RotateCcw className="h-3.5 w-3.5" aria-hidden="true" />
-                    <span>Demo verilerini sıfırla</span>
+                    <span>Yerel verileri sıfırla</span>
                   </button>
                 )}
               </div>

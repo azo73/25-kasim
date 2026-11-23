@@ -28,7 +28,7 @@ export default function SolidarityBanner({
   const handleShare = async () => {
     const cleanUrl = `${window.location.origin}${window.location.pathname}`;
     const shareData = {
-      title: '25 Kasım — Kadına Yönelik Şiddete Karşı Farkındalık',
+      title: 'Mor Ses — Kadına Yönelik Şiddete Karşı Farkındalık',
       text: 'Sessiz kalma. Gerçeklerle yüzleş ve mor kurdele bırakarak destek ol.',
       url: cleanUrl,
     };
@@ -52,12 +52,18 @@ export default function SolidarityBanner({
     }
   };
 
+  const displayCount =
+    typeof ribbonCount === 'number' ? ribbonCount.toLocaleString('tr-TR') : '0';
+
   return (
-    <header className="mx-auto w-full max-w-xl px-5 pb-8 pt-16 sm:px-8">
+    <header className="mx-auto w-full max-w-xl px-5 pb-8 pt-12 sm:px-8">
       <div className="flex flex-col items-center text-center">
         <span className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-ribbon">
-          <span className="h-1.5 w-1.5 rounded-full bg-ribbon" aria-hidden="true" />
-          25 Kasım Farkındalık Hareketi
+          <span
+            className="h-1.5 w-1.5 rounded-full bg-ribbon"
+            aria-hidden="true"
+          />
+          Mor Ses · Farkındalık Alanı
         </span>
 
         <h1 className="mt-3 font-serif text-[2.2rem] font-semibold leading-[1.1] tracking-[-0.02em] text-ink sm:text-[2.85rem]">
@@ -66,10 +72,9 @@ export default function SolidarityBanner({
 
         <p className="mt-3 max-w-md text-sm leading-relaxed text-muted sm:text-[0.98rem]">
           Kadına yönelik şiddet yalnızca fiziksel değildir. Mor kurdeleye
-          dokunarak desteğini göster, ardından aşağıdaki gerçeklerle yüzleş.
+          dokunarak desteğini göster, ardından gerçek verilerle yüzleş.
         </p>
 
-        {/* Tıklanabilir Mor Kurdele Alanı */}
         <button
           type="button"
           onClick={handleSupportClick}
@@ -101,11 +106,9 @@ export default function SolidarityBanner({
             <p className="mt-3 text-xs text-muted">
               Şu ana kadar{' '}
               <strong className="tabular-nums font-semibold text-ink">
-                {ribbonCount !== null
-                  ? ribbonCount.toLocaleString('tr-TR')
-                  : '—'}
+                {displayCount}
               </strong>{' '}
-              kişi destek verdi.
+              kişi kadına yönelik şiddete karşı mor kurdele bıraktı.
             </p>
           </div>
         ) : (
@@ -122,14 +125,12 @@ export default function SolidarityBanner({
                 </span>
                 <div>
                   <p className="text-sm font-semibold text-ink">
-                    Desteğin eklendi — yalnız değilsin, sessiz kalmıyoruz.
+                    Desteğin eklendi — sessiz kalmıyoruz.
                   </p>
                   <p className="mt-1 text-xs leading-relaxed text-muted">
                     Seninle birlikte şu an{' '}
                     <strong className="tabular-nums font-bold text-ribbon">
-                      {ribbonCount !== null
-                        ? ribbonCount.toLocaleString('tr-TR')
-                        : '1'}
+                      {displayCount}
                     </strong>{' '}
                     kişi kadına yönelik şiddete karşı mor kurdele bıraktı.
                   </p>

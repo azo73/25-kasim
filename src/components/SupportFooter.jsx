@@ -89,8 +89,8 @@ export default function SupportFooter() {
         </div>
 
         <p className="mt-6 border-t border-hairline pt-4 text-center text-[11px] leading-relaxed text-muted/85">
-          Atatürk Üniversitesi — Toplumsal Duyarlılık Projesi | Tamamen
-          Anonimdir, Kişisel Veri Toplanmaz.
+          Mor Ses — Toplumsal Farkındalık Projesi | Tamamen Anonimdir, Kişisel
+          Veri Toplanmaz.
         </p>
       </div>
     </footer>

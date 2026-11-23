@@ -24,7 +24,6 @@ export default function IntroSplash({ onFinish }) {
       className="fixed inset-0 z-40 flex cursor-pointer flex-col items-center justify-center bg-[#0B0A0F] px-6 text-center text-[#FAF8F5]"
     >
       <div className="relative flex flex-col items-center">
-        {/* Arka planda yumuşak mor hale */}
         <motion.span
           initial={{ scale: 0.7, opacity: 0 }}
           animate={{ scale: [0.85, 1.35], opacity: [0.45, 0] }}
@@ -33,7 +32,6 @@ export default function IntroSplash({ onFinish }) {
           className="pointer-events-none absolute top-4 h-44 w-44 rounded-full border border-[#7C3AED]/50 bg-[#5B21B6]/20"
         />
 
-        {/* Büyük Çizilen Mor Kurdele */}
         <svg
           viewBox="0 0 120 150"
           className="relative h-44 w-44 overflow-visible sm:h-52 sm:w-52"
@@ -72,7 +70,6 @@ export default function IntroSplash({ onFinish }) {
           />
         </svg>
 
-        {/* Vurucu Farkındalık Sözü */}
         <motion.p
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
@@ -88,7 +85,7 @@ export default function IntroSplash({ onFinish }) {
           transition={{ duration: 0.6, delay: 1.25 }}
           className="mt-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-[#C4B5FD]"
         >
-          25 Kasım · Kadına Yönelik Şiddete Karşı Mücadele Günü
+          Mor Ses · Kadına Yönelik Şiddete Karşı Farkındalık
         </motion.span>
       </div>
 

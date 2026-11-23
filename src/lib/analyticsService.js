@@ -1,34 +1,16 @@
 import { QUESTIONS } from '../data/questions';
 import { isSupabaseConfigured, supabase } from './supabase';
 
-const RIBBON_FLAG_KEY = 'ataturk_25kasim_ribbon_left_v2';
-const SESSION_ID_KEY = 'ataturk_25kasim_session_id_v2';
-const DEMO_STORE_KEY = 'ataturk_25kasim_demo_store_v2';
-const DEMO_EVENT_NAME = 'ataturk-25kasim-demo-update';
+const RIBBON_FLAG_KEY = 'mor_ses_ribbon_left_v3';
+const SESSION_ID_KEY = 'mor_ses_session_id_v3';
+const DEMO_STORE_KEY = 'mor_ses_demo_store_v3';
+const DEMO_EVENT_NAME = 'mor-ses-demo-update';
 
 function createInitialDemoStore() {
   return {
-    ribbons: 164,
-    responses: {
-      1: { q1_10: 54, q1_3: 82 },
-      2: { q2_street: 46, q2_home: 92 },
-      3: { q3_12: 58, q3_44: 74 },
-      4: { q4_love: 31, q4_iso: 103 },
-      5: { q5_no: 42, q5_yes: 88 },
-      6: { q6_proc: 35, q6_dep: 96 },
-      7: { q7_no: 39, q7_yes: 91 },
-      8: { q8_minor: 24, q8_blame: 108 },
-      9: { q9_trust: 49, q9_digital: 87 },
-      10: { q10_effort: 44, q10_crime: 86 },
-      11: { q11_65: 38, q11_35: 68, q11_11: 36 },
-      12: { q12_reveal: 51, q12_hidden: 84 },
-    },
-    locations: {
-      yemekhane: 58,
-      kutuphane: 46,
-      kantin: 34,
-      genel: 26,
-    },
+    ribbons: 0,
+    responses: {},
+    locations: {},
   };
 }
 
@@ -85,11 +67,11 @@ export function getOrCreateSessionId() {
     const generated =
       typeof crypto !== 'undefined' && crypto.randomUUID
         ? crypto.randomUUID()
-        : `ata-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+        : `ms-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
     window.localStorage.setItem(SESSION_ID_KEY, generated);
     return generated;
   } catch {
-    return `ata-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+    return `ms-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
   }
 }
 
@@ -122,7 +104,7 @@ export async function fetchRibbonCount() {
       // fallback aşağıda
     }
   }
-  return readDemoStore().ribbons;
+  return Number(readDemoStore().ribbons) || 0;
 }
 
 export async function recordQuestionResponse({
@@ -176,9 +158,9 @@ export async function recordQuestionResponse({
 
   const counts = Object.values(store.responses[questionId]);
   const total = counts.reduce((sum, n) => sum + n, 0);
-  const selected = store.responses[questionId][selectedOptionId] || 1;
+  const selected = store.responses[questionId][selectedOptionId] || 0;
   return {
-    sameGuessPercentage: total > 0 ? Math.round((selected / total) * 100) : 100,
+    sameGuessPercentage: total > 0 ? Math.round((selected / total) * 100) : 0,
     totalVotes: total,
   };
 }
@@ -210,7 +192,7 @@ export async function leavePurpleRibbon({ locationTag }) {
 
   markRibbonLeft();
   const store = readDemoStore();
-  store.ribbons += 1;
+  store.ribbons = (Number(store.ribbons) || 0) + 1;
   store.locations[locationTag] = (store.locations[locationTag] || 0) + 1;
   writeDemoStore(store);
   return { alreadyLeft: false, totalRibbons: store.ribbons };
@@ -243,7 +225,7 @@ export function subscribeToRibbons(onCountChange) {
 
   const handleStorage = (event) => {
     if (event.key === DEMO_STORE_KEY) {
-      onCountChange(readDemoStore().ribbons);
+      onCountChange(Number(readDemoStore().ribbons) || 0);
     }
   };
 
@@ -360,7 +342,7 @@ export async function fetchReportData() {
   return {
     mode: 'demo',
     totalResponses,
-    totalRibbons: store.ribbons,
+    totalRibbons: Number(store.ribbons) || 0,
     questionStats,
     locationStats,
     updatedAt: new Date(),

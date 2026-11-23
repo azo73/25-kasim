@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, Shuffle } from 'lucide-react';
 import { pickRandomQuestions } from '../data/questions';
+import { FEMICIDE_YTD_DATA } from '../data/femicideData';
 import { recordQuestionResponse } from '../lib/analyticsService';
 import CountUpNumber from './CountUpNumber';
 
@@ -142,8 +143,7 @@ function AwarenessCard({ question, index, locationTag }) {
                 <span>
                   Katılımcıların{' '}
                   <strong className="font-semibold text-ink">
-                    <CountUpNumber value={samePercent} prefix="%" duration={0.55} />
-                    &apos;i
+                    %{samePercent}&apos;i
                   </strong>{' '}
                   de senin gibi tahmin etti.
                 </span>
@@ -211,6 +211,30 @@ export default function RandomAwarenessCards({ locationTag }) {
           <Shuffle className="h-4 w-4 text-ribbon" aria-hidden="true" />
           <span>Farklı 4 Gerçek Daha Gör</span>
         </button>
+      </div>
+
+      {/* Butonun Altında Yıl İçi Kadın Cinayeti İzleme Verisi */}
+      <div className="mt-7 rounded-2xl border border-crimson/25 bg-crimson/[0.04] p-5 text-left">
+        <div className="flex items-center justify-between gap-2">
+          <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-crimson">
+            {FEMICIDE_YTD_DATA.year} Yılı Kayıtları
+          </span>
+          <span className="text-[11px] text-muted">
+            {FEMICIDE_YTD_DATA.asOfLabel}
+          </span>
+        </div>
+
+        <p className="tabular-nums mt-2 font-serif text-3xl font-bold tracking-[-0.02em] text-crimson sm:text-[2.2rem]">
+          {FEMICIDE_YTD_DATA.count.toLocaleString('tr-TR')} kadın
+        </p>
+
+        <p className="mt-1.5 text-sm font-medium text-ink">
+          {FEMICIDE_YTD_DATA.year} yılı içinde öldürülen kadın sayısı
+        </p>
+
+        <p className="mt-2 border-t border-crimson/15 pt-2.5 text-xs leading-relaxed text-muted">
+          {FEMICIDE_YTD_DATA.sourceNote}
+        </p>
       </div>
     </section>
   );
